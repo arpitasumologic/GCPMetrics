@@ -14,6 +14,7 @@ You need to have Monitoring API access enabled in your GCP project and have a VM
 
 **To use the utility you need to create ans save a json file similar to one below**
 
+```yaml
 {
    "delay_between_iteration_in_seconds":15,
    "instances":[
@@ -28,24 +29,25 @@ You need to have Monitoring API access enabled in your GCP project and have a VM
    "total_iteration_count":8,
    "wait_time_after_custom_descriptors_creations":5
 }
+```
 
 A sample  json for creating 1 milition metric data points per minute as below
-
+```yaml
 {
-    "delay_between_iteration_in_seconds": **15**,
+    "delay_between_iteration_in_seconds": 15,
     "instances": [
         {
-            "custom-descriptor_count": **1250**,
-            "data_point_count_per_custom_descriptor": **200**,
+            "custom-descriptor_count": 1250,
+            "data_point_count_per_custom_descriptor": 200,
             "instance_id": "288815808002646xxxx",
             "project_id": "xxxxxx",
             "zone": "us-central1-f"
         }
     ],
-    "total_iteration_count": **8**,
+    "total_iteration_count": 8,
     "wait_time_after_custom_descriptors_creations": 60
 }
-
+```
 1250 X 200 =  2,50,000 data points  every 15 seconds ( 1 milion per minute) with 8 such iterations for 15 X 8 =120 seconds (2 minutes)
 
 ### Setup
