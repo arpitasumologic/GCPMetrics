@@ -1,0 +1,8 @@
+arq==0.22
+google-api-core==2.2.2
+google-auth==2.3.3
+google-cloud==0.34.0
+google-cloud-core==2.2.0
+google-cloud-monitoring==2.7.0
+googleapis-common-protos==1.53.0
+
