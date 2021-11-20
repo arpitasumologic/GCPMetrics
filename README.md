@@ -65,7 +65,8 @@ docker run -it --rm --name arq_worker  --network=host -e "REDIS_HOST=redis"  -e 
 
 #### Run the python script (in another terminal)
 export GOOGLE_APPLICATION_CREDENTIALS=< GCP service account file path >
-export INPUT_JSON=< JSON input file path >
+
+export INPUT=< JSON input file path >
 
 docker build -t vm_metric  -f ScriptDockerfile .
 
