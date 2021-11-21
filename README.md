@@ -14,7 +14,7 @@ You need to have Monitoring API access enabled in your GCP project and have a VM
 
 **To use the utility you need to create ans save a json file similar to one below**
 
-```yaml
+```json
 {
    "delay_between_iteration_in_seconds":15,
    "instances":[
@@ -32,7 +32,7 @@ You need to have Monitoring API access enabled in your GCP project and have a VM
 ```
 
 A sample  json for creating 1 milition metric data points per minute as below
-```yaml
+```json
 {
     "delay_between_iteration_in_seconds": 15,
     "instances": [
@@ -57,6 +57,7 @@ A sample  json for creating 1 milition metric data points per minute as below
 2. GCP service account file in JSON format
 
 #### Setup the ARQ worker with Redis backend (in one terminal)
+```shell
 export GOOGLE_APPLICATION_CREDENTIALS=< GCP service account file path >
 
 docker run -d --network=host --hostname redis --name redis redis
@@ -64,8 +65,10 @@ docker run -d --network=host --hostname redis --name redis redis
 docker build -t arq_worker  -f ArqDockerfile .
 
 docker run -it --rm --name arq_worker  --network=host -e "REDIS_HOST=redis"  -e "GOOGLE_APPLICATION_CREDENTIALS=service_account.json" -v "${GOOGLE_APPLICATION_CREDENTIALS}":/service_account.json  arq_worker 
+```
 
 #### Run the python script (in another terminal)
+```shell
 export GOOGLE_APPLICATION_CREDENTIALS=< GCP service account file path >
 
 export INPUT=< JSON input file path >
@@ -73,5 +76,5 @@ export INPUT=< JSON input file path >
 docker build -t vm_metric  -f ScriptDockerfile .
 
 docker run  -it --rm --name vm_metric --network=host -e "GOOGLE_APPLICATION_CREDENTIALS=service_account.json" -v  "${GOOGLE_APPLICATION_CREDENTIALS}":/service_account.json -v "${INPUT}":/input.json vm_metric input.json
-
+```
 Open [GCP Cloud Console ](https://console.cloud.google.com/ "GCP Cloud Console ") and check for your project under Monitoring ->Metric Explorer if time series data have been generated for given duration and the VM.
