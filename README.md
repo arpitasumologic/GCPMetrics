@@ -53,7 +53,7 @@ A sample  json for creating 1 milition metric data points per minute as below
 ### Setup
 
 #### Input files
-1.  The Json file created above
+1. The JSON file created as above
 2. GCP service account file in JSON format
 
 #### Setup the ARQ worker with Redis backend (in one terminal)
