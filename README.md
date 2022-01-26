@@ -80,7 +80,7 @@ docker run  -it --rm --name vm_metric --network=host -e "GOOGLE_APPLICATION_CRED
 Open [GCP Cloud Console ](https://console.cloud.google.com/ "GCP Cloud Console ") and check for your project under Monitoring ->Metric Explorer if time series data have been generated for given duration and the VM.
 
 ### Note
-In case you are using GCP Compute Engine (instance) to generate traffic and docker is not installed please use the below script to install docker on debian os
+In case you are using GCP Compute Engine (instance) to generate datapoints  and docker is not installed please use the below script to install docker on debian os
 ``` shell
 sudo apt-get update
 sudo apt-get -y install \
