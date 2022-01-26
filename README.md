@@ -78,3 +78,31 @@ docker build -t vm_metric  -f ScriptDockerfile .
 docker run  -it --rm --name vm_metric --network=host -e "GOOGLE_APPLICATION_CREDENTIALS=service_account.json" -v  "${GOOGLE_APPLICATION_CREDENTIALS}":/service_account.json -v "${INPUT}":/input.json vm_metric input.json
 ```
 Open [GCP Cloud Console ](https://console.cloud.google.com/ "GCP Cloud Console ") and check for your project under Monitoring ->Metric Explorer if time series data have been generated for given duration and the VM.
+
+### Note
+In case you are using GCP Compute Engine (instance) to generate traffic and docker is not installed please use the below script to install docker on debian os
+``` shell
+sudo apt-get update
+sudo apt-get -y install \
+  ca-certificates \
+  curl \
+  gnupg \
+  lsb-release
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+ "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+
+#Run docker without sudo access
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo chown root:docker /var/run/docker.sock
+sudo chown -R root:docker /var/run/docker
+```
+logout and re-login and 'docker' comand without sudo
+``` shell
+docker run hello-world
+```
+
