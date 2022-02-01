@@ -345,7 +345,8 @@ async def add_descriptors(json_input, sleep_time_in_seconds=5, async_concurrency
                              zone=instance['zone'],
                              descriptor_count=instance['custom-descriptor_count'],
                              data_point_count_per_descriptor=instance['data_point_count_per_custom_descriptor'],
-                             async_concurrency_limit=async_concurrency_limit
+                             async_concurrency_limit=async_concurrency_limit,
+                             descriptor_prefix=f"my_metric_{instance['instance_id']}"
                              )
         await worker.async_add_descriptors(delete_pre_existing_descriptors=False)
         print(f"Sleeping for {sleep_time_in_seconds} seconds...")
@@ -359,7 +360,8 @@ async def add_data_points(ctx, project_id, instance_id, zone, data_point_count_p
                          instance_id=instance_id,
                          zone=zone,
                          data_point_count_per_descriptor=data_point_count_per_descriptor,
-                         async_concurrency_limit=async_concurrency_limit
+                         async_concurrency_limit=async_concurrency_limit,
+                         descriptor_prefix=f"my_metric_{instance_id}"
                          )
     await worker.add_data_points(timestamp=timestamp)
 
